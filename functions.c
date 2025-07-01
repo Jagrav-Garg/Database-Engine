@@ -24,7 +24,7 @@ Page* create_page() { // Function to create a new page
     // Allocate memory for a new page
     Page* new_page = (Page*)malloc(sizeof(Page));
     if (!new_page) {
-        printf("Not enough Memory for a page😭😭😭.\n");
+        printf("Not enough Memory for a page ಥ_ಥ.\n");
         // Print relevant information if memory allocation fails
         return NULL;
     }
@@ -39,7 +39,7 @@ table* create_table() { // Function to create a new table
     // Allocate memory for a new table
     table* new_table = (table*)malloc(sizeof(table));
     if (!new_table) {
-        printf("Not enough Memory for a table😭😭😭.\n");
+        printf("Not enough Memory for a table ಥ_ಥ.\n");
         return NULL; // If memory allocation fails, print an error message and return NULL
     }
     
@@ -117,7 +117,7 @@ bool insert_row(table* table, int roll, const char* name){
                 mark_active(bm, j); // Mark the row as active in the bitmap
                 table->active_rows[i]++;  // Increase the count of active rows in the page
                 // Print a success message
-                printf("✅ Inserted Row: Page Number: %d, Row Number: %d, Roll: %d, Name: %s\n", i, j, roll, name);
+                printf(":D Inserted Row: Page Number: %d, Row Number: %d, Roll: %d, Name: %s\n", i, j, roll, name);
                 return true; // Return true to indicate successful insertion
             }
         }
@@ -143,7 +143,7 @@ void delete_row(table* table, int roll){
             Row* row = &(page->rows[j]);
             
             if (row->roll == roll) {// If the roll number matches, delete the row
-                printf("⚠️ Deleting Row: Page Number: %d, Row Number: %d, Roll: %d, Name: %s\n", i, j, row->roll, row->name);
+                printf(" Deleting Row: Page Number: %d, Row Number: %d, Roll: %d, Name: %s\n", i, j, row->roll, row->name);
                 table->active_rows[i]--;// Decrease the count of active rows in the page
                 mark_inactive(bm, j);// Mark the row as inactive in the bitmap
                 row->roll = 0; // Clear the roll number
@@ -159,6 +159,6 @@ void delete_row(table* table, int roll){
             }
         }
     }
-    printf("Roll number %d not found in the table.⛔\n", roll);// If the roll number is not found, print a message
+    printf("Roll number %d not found in the table. =( \n", roll);// If the roll number is not found, print a message
 
 }

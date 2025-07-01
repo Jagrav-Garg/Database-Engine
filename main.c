@@ -28,7 +28,7 @@ int main(){
             printf("Enter Roll Number: ");
             scanf("%d", &roll);
             if( roll <= 0) { // Check if the roll number is a positive integer
-                printf("Invalid roll number. Roll number is a positive integer.\n");
+                printf("Invalid roll number. Roll number must be a positive integer.\n");
                 continue; // Skip this iteration if the roll number is invalid
             }
             if( search_table(my_table, roll)) { // Check if the roll number already exists in the table
