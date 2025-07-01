@@ -4,7 +4,6 @@
 #ifndef MYUTILS_H
 #define MYUTILS_H
 
-#define PAGE_SIZE 4096
 #define TOTAL_PAGES 100
 
 
