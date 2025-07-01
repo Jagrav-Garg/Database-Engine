@@ -3,6 +3,8 @@
 // function to search for a specific row in table
 void search_table(table* table, int roll){
     
+    // flag to check if any entry is found
+    int found = 0;
     // loop over all pages
     for (int i = 0; i < TOTAL_PAGES; i++){
         Page* page = table->pages[i];
@@ -22,18 +24,22 @@ void search_table(table* table, int roll){
             Row row = page->rows[j];
             
             if (row.roll == roll) {
-                printf("Page Number: %d\nRow Number: %d\nRoll: %d\nName: %s", i, j, roll, row.name);
+                found = 1;
+                printf("Page Number: %d, Row Number: %d, Roll: %d, Name: %s\n", i, j, roll, row.name);
             }
         }
 
 
     }
+
+    if (!found) printf("No result found for that query.\n");
+    return;
 }
 
 // function to print all rows in table
 void print_table(table* table){
     
-
+    int found = 0; 
     for (int i = 0; i < TOTAL_PAGES; i++){
         Page* page = table->pages[i];
         
@@ -45,9 +51,13 @@ void print_table(table* table){
             
             // check if row contains data or not
             if (is_active(bm, j)) {
+                found = 1;
                 Row* row = &page->rows[j];
                 printf("Page Number: %d, Row Number: %d, Roll: %d, Name: %s\n", i, j, row->roll, row->name);
             }
         }
     }
+
+    if (!found) printf("Table is empty.\n");
+    return;
 }
