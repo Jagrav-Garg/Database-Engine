@@ -1,6 +1,4 @@
 #include "functions.h"
-#include <stdio.h>
-#include "myutils.h"
 
 bool adjust_name(char* name, size_t max_len) {
     if (strchr(name, '\n') == NULL) {

@@ -4,6 +4,8 @@
 #include "myutils.h"
 #include <stdbool.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
 bool adjust_name(char* name, size_t max_len); // Adjusts the name to ensure it is null-terminated and does not exceed max length
 // It also removes any newline character if present

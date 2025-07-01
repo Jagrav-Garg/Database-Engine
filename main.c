@@ -32,7 +32,7 @@ int main(){
                 continue; // Skip this iteration if the roll number is invalid
             }
             if( search_table(my_table, roll)) { // Check if the roll number already exists in the table
-                printf("Roll number %d already exists. Please enter a unique roll number.\n", roll);
+                printf("\nRoll number %d already exists. Please enter a unique roll number.\n", roll);
                 continue; // Skip this iteration if the roll number already exists
             }
             printf("Enter Name: ");
