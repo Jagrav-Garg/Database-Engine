@@ -5,11 +5,12 @@
 #define MYUTILS_H
 
 #define TOTAL_PAGES 100
+#define MAX_NAME_LENGTH 28 
 
 
 typedef struct row {
     int roll;
-    char name[28];
+    char name[MAX_NAME_LENGTH];
 } Row;
 
 
