@@ -24,7 +24,7 @@ Page* create_page() { // Function to create a new page
     // Allocate memory for a new page
     Page* new_page = (Page*)malloc(sizeof(Page));
     if (!new_page) {
-        printf("Not enough Memory for a page ಥ_ಥ.\n");
+        printf("Not enough Memory for a page =[ .\n");
         // Print relevant information if memory allocation fails
         return NULL;
     }
@@ -39,7 +39,7 @@ table* create_table() { // Function to create a new table
     // Allocate memory for a new table
     table* new_table = (table*)malloc(sizeof(table));
     if (!new_table) {
-        printf("Not enough Memory for a table ಥ_ಥ.\n");
+        printf("Not enough Memory for a table =[ .\n");
         return NULL; // If memory allocation fails, print an error message and return NULL
     }
     
@@ -122,7 +122,7 @@ bool insert_row(table* table, int roll, const char* name){
             }
         }
     }
-    printf("Table is full, cannot insert new row.🙅‍♂️\n");
+    printf("Table is full, cannot insert new row.\n");
     // If no inactive row is found in any page, print a message indicating that the table is full and cannot insert the new row
     return false; // Return false to indicate that the insertion failed
 
