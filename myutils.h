@@ -10,24 +10,22 @@
 
 typedef struct row {
     int roll;
-    char name[27];
+    char name[28];
 } Row;
 
 
 
-const size_t ROW_SIZE = sizeof(Row);
 #define ROWS_PER_PAGE 128
+#define BITMAP_SIZE (ROWS_PER_PAGE / 16)
 
 typedef struct {
-    Row rows[ROWS_PER_PAGE];
-    uint16_t bitmap[8];
-    int num_rows;
+    Row rows[ROWS_PER_PAGE];    
 } Page;
 
 typedef struct {
     Page* pages[TOTAL_PAGES];
-    int total_pages;
-    int next_free_page; // last unfilled page
+    uint16_t bitmap[TOTAL_PAGES][BITMAP_SIZE];
+    uint8_t active_rows[TOTAL_PAGES];
 } table;
 
 
