@@ -3,6 +3,12 @@
 #include "functions.h"
 
 
+void clear_buffer()
+{
+    int ch;
+    while ((ch = getchar()) != '\n' && ch != EOF);
+}
+
 int main(){
     table* my_table= create_table(); // Create a new table
     if (!my_table) {
@@ -20,13 +26,18 @@ int main(){
         scanf("%d", &choice);
         int roll;
         char name[28]; 
+        roll=0;
         switch (choice) {
         case 1:
             // Insert a new row into the table
             // Prompt user for roll number and name
             printf("Inserting a new row...\n");
             printf("Enter Roll Number: ");
-            scanf("%d", &roll);
+            if(scanf("%d", &roll)!=1){
+                printf("The input is invalid! Kindly add a positive integer as input\n");
+                clear_buffer();
+                continue;
+            }
             if( roll <= 0) { // Check if the roll number is a positive integer
                 printf("Invalid roll number. Roll number must be a positive integer.\n");
                 continue; // Skip this iteration if the roll number is invalid

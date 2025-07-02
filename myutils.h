@@ -35,5 +35,4 @@ int is_active(uint16_t* bm, int i);
 void mark_active(uint16_t* bm, int i);
 void mark_inactive(uint16_t* bm, int i);
 
-
 #endif

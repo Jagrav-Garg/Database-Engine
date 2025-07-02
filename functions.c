@@ -87,10 +87,10 @@ bool search_table(table* table, int roll){
 void print_table(table* table){
     
     int found = 0; 
-    for (int i = 0; i < TOTAL_PAGES; i++){
+    for (int i = 0; i < TOTAL_PAGES; i++){// iterate through all pages
         Page* page = table->pages[i];
         
-        if (!page || table->active_rows[i] == 0) continue;
+        if (!page || table->active_rows[i] == 0) continue;//check if page is null or has no active rows
 
         uint16_t* bm = table->bitmap[i];
 
@@ -172,5 +172,6 @@ void delete_row(table* table, int roll){
         }
     }
     printf("Roll number %d not found in the table. =( \n", roll);// If the roll number is not found, print a message
-
+ 
 }
+
