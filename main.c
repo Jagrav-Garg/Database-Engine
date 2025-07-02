@@ -18,13 +18,13 @@ int main(){
         printf("5. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
+        int roll;
+        char name[28]; 
         switch (choice) {
         case 1:
             // Insert a new row into the table
             // Prompt user for roll number and name
             printf("Inserting a new row...\n");
-            int roll; 
-            char name[28]; 
             printf("Enter Roll Number: ");
             scanf("%d", &roll);
             if( roll <= 0) { // Check if the roll number is a positive integer
@@ -44,13 +44,12 @@ int main(){
             }
             insert_row(my_table, roll, name); // Call the function to insert the new row
             break;
-
         case 2:
             // Search for a row in the table
             printf("Enter Roll Number to Search: ");
             scanf("%d", &roll);
             if (!search_table(my_table, roll)) {
-                printf("Roll number %d not found.⛔\n", roll);
+                printf("Roll number %d not found.\n", roll);
             }
             break;
 
@@ -78,7 +77,7 @@ int main(){
             free(my_table);// Free the table itself
             return 0;
 
-        default:
+        default: printf("Invalid choice. Please try again.\n");
             break;
         }
     }
