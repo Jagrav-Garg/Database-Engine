@@ -19,7 +19,7 @@ We implemented in-memory "Pages" to store rows of data and a table structure to 
 During runtime, the program will prompt the user to enter required inputs for each operation.
 
 ---
-### ⏳ Future Parts:
+### Future Parts:
 - **Part 2**: [Coming Soon]
 - **Part 3**: [Coming Soon]
 - **Part 4**: [Coming Soon]
