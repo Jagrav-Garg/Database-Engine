@@ -3,8 +3,8 @@
 #include<stdint.h>
 #include<stdbool.h>
 
-#ifndef AVL_H
-#define AVL_H
+#ifndef TREE_H
+#define TREE_H
 
 typedef struct Node{
     int key;
