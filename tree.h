@@ -17,6 +17,6 @@ typedef struct Node{
 
 void index_insert(Node** node,int key,int page,int slot);
 bool index_find(int key,int* page,int* slot);
-void index_delete(int key);
+void index_delete(Node** node, int key);
 // void print_backend_test(Node* root);
 #endif
