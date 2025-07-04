@@ -10,9 +10,9 @@ typedef struct Node{
     int key;
     int page_no;
     int slot;
+    int height;
     struct Node* left;
     struct Node* right;
-    int height;
 } Node;
 
 void index_insert(Node** node,int key,int page,int slot);
