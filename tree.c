@@ -119,3 +119,67 @@ bool index_find(int key, int* page, int* slot){
 void index_delete(int key){
    
 }
+void index_delete(Node** node_pointer, int key){
+    Node* node=*node_pointer;
+    if (node==NULL){
+        return; // Key not found
+    }
+    if (key<node->key){
+        index_delete(&(node->left),key);
+    }
+    else if (key>node->key){
+        index_delete(&(node->right),key);
+    }
+    else{
+        // Node with only one child or no child
+        if (node->left==NULL){
+            Node* temp=node->right;
+            free(node);
+            *node_pointer=temp;
+            return;
+        }
+        else if (node->right==NULL){
+            Node* temp=node->left;
+            free(node);
+            *node_pointer=temp;
+            return;
+        }
+        else{
+            // Node with two children: Get the smallest node in the right subtree
+            Node* temp=node->right;
+            while (temp->left!=NULL){
+                temp=temp->left;
+            }
+            // Copy the values of temp to root
+            node->key=temp->key;
+            node->page_no=temp->page_no;
+            node->slot=temp->slot;
+            // Delete temp node
+            index_delete(&(node->right),node->key);
+        }
+    }
+    node=*node_pointer; // Update the node pointer to the current node after deletion
+    if (node == NULL) {
+        return; // If the node is now NULL, nothing to update
+    }
+    // If the node is not NULL, update height after deletion
+    node->height=1+max(get_height(node->left),get_height(node->right));
+    // Check balance factor and perform rotations if necessary
+    int bfactor=balance_factor(node);
+    if (bfactor==2 && balance_factor(node->left)>=0){
+        node=right_rotate(node); // Left Left Case
+    }
+    else if (bfactor==2 && balance_factor(node->left)<0){
+        node->left=left_rotate(node->left); // Left Right Case
+        node=right_rotate(node);
+    }
+    else if (bfactor==-2 && balance_factor(node->right)<=0){
+        node=left_rotate(node); // Right Right Case
+    }
+    else if (bfactor==-2 && balance_factor(node->right)>0){
+        node->right=right_rotate(node->right); // Right Left Case
+        node=left_rotate(node);
+    }
+    *node_pointer=node;
+    return;
+}
