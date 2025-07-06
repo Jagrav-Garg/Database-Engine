@@ -116,9 +116,7 @@ bool index_find(int key, int* page, int* slot){
     return false; // Return false if the node is not found
 }
 
-void index_delete(int key){
-   
-}
+
 void index_delete(Node** node_pointer, int key){
     Node* node=*node_pointer;
     if (node==NULL){
