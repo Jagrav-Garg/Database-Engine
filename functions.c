@@ -1,4 +1,22 @@
 #include "functions.h"
+#include "tree.h"
+#include <limits.h>
+
+int valid_roll(char* input){
+    int value=0;
+    for(int i=0; input[i]!='\0'; i++){
+        if(input[i]<'0' || input[i]>'9') {
+            printf("Invalid roll number. Please enter a positive integer.\n");
+            return -1; // Indicate invalid input
+        }
+        if(value > (INT_MAX - (input[i] - '0')) / 10) {
+            printf("Roll number too large. Please enter a  roll number in range of 0 to %d.\n", INT_MAX);
+            return -1;
+        }
+        value = value * 10 + (input[i] - '0'); // Convert character to integer
+    }
+    return value; // Return the valid roll number
+}
 
 bool adjust_name(char* name, size_t max_len) {
     if (strchr(name, '\n') == NULL) {
@@ -9,6 +27,10 @@ bool adjust_name(char* name, size_t max_len) {
     }
     // Remove newline character from name if present
     size_t len = strlen(name);
+    if(len>=max_len){
+        printf("Name exceeds maximum length of %zu characters.\n", max_len);
+        return false; // Indicate overflow if name exceeds max length
+    }
     if (len > 0 && name[len - 1] == '\n') {
         name[len - 1] = '\0';
         len--;
@@ -50,7 +72,7 @@ table* create_table() { // Function to create a new table
             new_table->bitmap[i][j] = 0; // Initialize bitmap to 0
         }
     }
-    
+
     return new_table; // Return the newly created table
 }
 
@@ -86,7 +108,7 @@ bool search_table(table* table, int roll){
 // function to print all rows in table
 void print_table(table* table){
     
-    int found = 0; 
+    bool found = false; 
     for (int i = 0; i < TOTAL_PAGES; i++){// iterate through all pages
         Page* page = table->pages[i];
         
@@ -98,7 +120,7 @@ void print_table(table* table){
             
             // check if row contains data or not
             if (is_active(bm, j)) {
-                found = 1;
+                found = true;
                 Row* row = &page->rows[j];
                 printf("Page Number: %d, Row Number: %d, Roll: %d, Name: %s\n", i, j, row->roll, row->name);
             }
@@ -128,8 +150,8 @@ bool insert_row(table* table, int roll, const char* name){
                 strcpy(page->rows[j].name, name);
                 mark_active(bm, j); // Mark the row as active in the bitmap
                 table->active_rows[i]++;  // Increase the count of active rows in the page
-                // Print a success message
                 printf(":D Inserted Row: Page Number: %d, Row Number: %d, Roll: %d, Name: %s\n", i, j, roll, name);
+                index_insert(&root, roll, i, j); // Insert the row into the index tree
                 return true; // Return true to indicate successful insertion
             }
         }
@@ -162,11 +184,11 @@ void delete_row(table* table, int roll){
                 for(int k = 0; k < 28; k++) {
                     row->name[k] = '\0'; // Mask the name with null characters
                 }
-                // Mask the name with null characters to ensure that the name is not guessable
                 if(table->active_rows[i] == 0) {
                     free(page); // If there are no active rows left in the page, free the page memory
                     table->pages[i] = NULL; // Set the page pointer to NULL
                 }
+                index_delete(roll); // Delete the row from the index tree
                 return;
             }
         }

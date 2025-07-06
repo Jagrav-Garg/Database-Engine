@@ -33,18 +33,11 @@ int main(){
             // Prompt user for roll number and name
             printf("Inserting a new row...\n");
             printf("Enter Roll Number: ");
-            if(scanf("%d", &roll)!=1){
-                printf("The input is invalid! Kindly add a positive integer as input\n");
-                clear_buffer();
-                continue;
-            }
-            if( roll <= 0) { // Check if the roll number is a positive integer
-                printf("Invalid roll number. Roll number must be a positive integer.\n");
-                continue; // Skip this iteration if the roll number is invalid
-            }
-            if( search_table(my_table, roll)) { // Check if the roll number already exists in the table
-                printf("\nRoll number %d already exists. Please enter a unique roll number.\n", roll);
-                continue; // Skip this iteration if the roll number already exists
+            char input[20]; // Buffer to read the roll number input
+            scanf("%s", input); // Read the input as a string
+            roll = valid_roll(input); // Validate the roll number input
+            if(roll==-1){
+                continue; // If the roll number is invalid, skip this iteration
             }
             printf("Enter Name: ");
             getchar();  // Consume newline character left by previous scanf
@@ -58,7 +51,12 @@ int main(){
         case 2:
             // Search for a row in the table
             printf("Enter Roll Number to Search: ");
-            scanf("%d", &roll);
+            char input[20]; // Buffer to read the roll number input
+            scanf("%s", input); // Read the input as a string
+            roll = valid_roll(input); // Validate the roll number input
+            if (roll == -1) {
+                continue; // If the roll number is invalid, skip this iteration
+            }
             if (!search_table(my_table, roll)) {
                 printf("Roll number %d not found.\n", roll);
             }
@@ -72,7 +70,12 @@ int main(){
         case 4:
             // Delete a row from the table
             printf("Enter Roll Number to Delete: ");
-            scanf("%d", &roll);
+            char input[20]; // Buffer to read the roll number input
+            scanf("%s", input); // Read the input as a string
+            roll = valid_roll(input); // Validate the roll number input
+            if (roll == -1) {
+                continue; // If the roll number is invalid, skip this iteration
+            }
             delete_row(my_table, roll);
             break;
 

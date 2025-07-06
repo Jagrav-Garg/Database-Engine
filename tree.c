@@ -1,5 +1,5 @@
 #include "tree.h"
-Node* root=NULL;
+root = NULL; // Initialize the root of the AVL tree
 
 Node* create_node(int key,int page,int slot){
     Node* new_node=(Node*)malloc(sizeof(Node));
@@ -114,4 +114,8 @@ bool index_find(int key, int* page, int* slot){
         return true;    // Return true if the node is found
     }
     return false; // Return false if the node is not found
+}
+
+void index_delete(int key){
+   
 }
