@@ -105,3 +105,13 @@ void index_insert(Node** node, int key, int page, int slot)
 //     print_backend_test(root->left);
 //     print_backend_test(root->right);
 // }
+
+bool index_find(int key, int* page, int* slot){
+    Node* found_node = search(root, key); // Search for the node with the given key
+    if(found_node != NULL){
+        *page = found_node->page_no; // Pasting the page number
+        *slot = found_node->slot; // Pasting the slot number
+        return true;    // Return true if the node is found
+    }
+    return false; // Return false if the node is not found
+}
