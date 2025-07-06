@@ -188,7 +188,7 @@ void delete_row(table* table, int roll){
                     free(page); // If there are no active rows left in the page, free the page memory
                     table->pages[i] = NULL; // Set the page pointer to NULL
                 }
-                index_delete(roll); // Delete the row from the index tree
+                index_delete(&root, roll); // Delete the row from the index tree
                 return;
             }
         }
