@@ -1,5 +1,5 @@
 #include "tree.h"
-root = NULL; // Initialize the root of the AVL tree
+Node* root = NULL; // Initialize the root of the AVL tree
 
 Node* create_node(int key,int page,int slot){
     Node* new_node=(Node*)malloc(sizeof(Node));

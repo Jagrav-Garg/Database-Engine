@@ -26,6 +26,7 @@ int main(){
         scanf("%d", &choice);
         int roll;
         char name[28]; 
+        char input[20]; // Buffer to read the roll number input
         roll=0;
         switch (choice) {
         case 1:
@@ -33,11 +34,14 @@ int main(){
             // Prompt user for roll number and name
             printf("Inserting a new row...\n");
             printf("Enter Roll Number: ");
-            char input[20]; // Buffer to read the roll number input
             scanf("%s", input); // Read the input as a string
             roll = valid_roll(input); // Validate the roll number input
             if(roll==-1){
                 continue; // If the roll number is invalid, skip this iteration
+            }
+            if(search_table(my_table, roll)) {
+                printf("\nRoll number %d already exists. Please enter a unique roll number.\n", roll);
+                continue; // If the roll number already exists, skip this iteration
             }
             printf("Enter Name: ");
             getchar();  // Consume newline character left by previous scanf
@@ -51,7 +55,6 @@ int main(){
         case 2:
             // Search for a row in the table
             printf("Enter Roll Number to Search: ");
-            char input[20]; // Buffer to read the roll number input
             scanf("%s", input); // Read the input as a string
             roll = valid_roll(input); // Validate the roll number input
             if (roll == -1) {
@@ -70,7 +73,6 @@ int main(){
         case 4:
             // Delete a row from the table
             printf("Enter Roll Number to Delete: ");
-            char input[20]; // Buffer to read the roll number input
             scanf("%s", input); // Read the input as a string
             roll = valid_roll(input); // Validate the roll number input
             if (roll == -1) {
@@ -94,5 +96,8 @@ int main(){
         default: printf("Invalid choice. Please try again.\n");
             break;
         }
+        input[0] = '\0'; // Clear the input buffer
+        name[0] = '\0'; // Clear the name buffer
+        clear_buffer(); // Clear any remaining input in the buffer
     }
 }

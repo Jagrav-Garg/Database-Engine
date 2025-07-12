@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <string.h>
 
+int valid_roll(char* input); // Validate the roll number input, ensuring it is a positive integer and within the range of INT_MAX
 bool adjust_name(char* name, size_t max_len); // Adjusts the name to ensure it is null-terminated and does not exceed max length
 // It also removes any newline character if present
 bool search_table (table* table, int roll); // Search for a row by roll number returning true if found, false otherwise
