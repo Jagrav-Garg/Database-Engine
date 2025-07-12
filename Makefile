@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -g
 TARGET = main
 
 # Source and object files
-SRCS = main.c functions.c myutils.c tree.c
+SRCS = main.c functions.c myutils.c tree.c cache.c
 OBJS = $(SRCS:.c=.o)
 
 # Default target
